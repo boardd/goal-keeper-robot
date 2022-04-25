@@ -1,4 +1,4 @@
-# Automatic Goal Keeper
+# Autonomous Goal Keeper
 
 ## The Robot
 
