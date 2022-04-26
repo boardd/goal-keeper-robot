@@ -20,7 +20,7 @@ The robot was constructed using 3D-Printed parts as this was the most efficient 
 
 <img src="robotFrontView.jpeg" alt="Robot Front View" width="600" class="center"/>
 
-Most of the mounting hardware was recycled from the Elegoo Tumbller, which was the robot we used in labs in the past. This included 8 standoffs, 2 motor mounts, one plastic plate, and a few M3 screws. Although we designed the goal to be printed in 2 parts and glued together, we also used the motor mounts to strengthen the bridging by screwing it between the two halves.
+Most of the mounting hardware was recycled from the <a href="https://www.elegoo.com/collections/robot-kits/products/elegoo-tumbller-self-balancing-robot-car">Elegoo Tumbller</a>, which was the robot we used in labs in the past. This included 8 standoffs, 2 motor mounts, one plastic plate, and a few M3 screws. Although we designed the goal to be printed in 2 parts and glued together, we also used the motor mounts to strengthen the bridging by screwing it between the two halves.
 
 <img src="robotTopView.jpeg" alt="Robot Top View" width="600" class="center"/>
 
