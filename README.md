@@ -1,9 +1,9 @@
 # Autonomous Goal Keeper
 
 ## The Robot
-
-<center><img src="robotIsoView.jpeg" alt="Robot Isometric View" width="600" class="center"/><center>
-
+<div style="text-align: center;">
+<img src="robotIsoView.jpeg" alt="Robot Isometric View" width="600" class="center"/>
+</div>
 ## The Software
 
 ### Tracking the Ball
@@ -16,12 +16,12 @@
 
 ## The Hardware
 
-<center><img src="robotFrontView.jpeg" alt="Robot Front View" width="400" class="center"/><center>
-<center><img src="robotTopView.jpeg" alt="Robot Top View" width="400" class="center"/><center>
+<img src="robotFrontView.jpeg" alt="Robot Front View" width="400" class="center"/>
+<img src="robotTopView.jpeg" alt="Robot Top View" width="400" class="center"/>
 
 ### The Setup
 
-<center><img src="setup.jpeg" alt="Full Setup" width="400" class="center"/><center>
+<img src="setup.jpeg" alt="Full Setup" width="400" class="center"/>
 <img src="setupTopView.jpeg" alt="Top View of Setup" width="400" class="center"/>
 
 ### Electronics
