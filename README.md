@@ -2,7 +2,7 @@
 
 ## The Robot
 
-<img src="robotIsoView.jpeg" alt="Robot Isometric View" width="1000" class="center"/>
+<img src="robotIsoView.jpeg" alt="Robot Isometric View" width="800" class="center"/>
 
 ## The Software
 
@@ -47,14 +47,14 @@ All dimensions are in millimeters.
 
 <img src="dimensions.png" alt="Robot Dimesions" width="500" class="center"/>
 
-<img src="blockerTop.png" alt="Blocker Top Dimensions" height="300" class="center"/> <img src="blockerSide.png" alt="Blocker Side Dimensions" height="200" class="center"/>
+<img src="blockerTop.png" alt="Blocker Top Dimensions" height="300" class="center"/> <img src="blockerSide.png" alt="Blocker Side Dimensions" height="300" class="center"/>
 
 
 ### Robot CAD
 
 All robot CAD is availiable on our github for 3D-printing (STL files only)
 
-<img src="robotRender.jpeg" alt="robot render" width="1000" class="center"/>
+<img src="robotRender.jpeg" alt="robot render" width="500" class="center"/>
 
 ### Parts Used
 
