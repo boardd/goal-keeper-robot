@@ -16,9 +16,13 @@
 
 ### The Setup
 
-![setupTopView](setupTopView.heic)
+![setup](setup.jpg)
+![setupTopView](setupTopView.jpg)
 
 ### Electronics
+
+![camera](cameraSetup.jpg)
+
 
 ### Robot Dimensions
 
