@@ -62,7 +62,11 @@ Since the arm of the goal keeping robot is controlled by an arduino, it cannot r
 
 ### Performance Demonstration
 
-TODO, once we have fixed some bugs
+[Ball on Stick](https://youtube.com/shorts/yKTe_psrHVw)
+
+[Rolling Ball Success](https://youtube.com/shorts/OoNNkdcSWSA)
+
+[Rolling Ball Failure](https://youtube.com/shorts/upyzuLVMyPU)
 
 ## The Hardware
 
