@@ -2,6 +2,8 @@
 
 ## The Robot
 
+<img src="robotIsoView.jpeg" alt="Robot Isometric View" width="600" class="center"/>
+
 ## The Software
 
 ### Tracking the Ball
@@ -14,14 +16,17 @@
 
 ## The Hardware
 
+<img src="robotFrontView.jpeg" alt="Robot Front View" width="400" class="center"/>
+<img src="robotTopView.jpeg" alt="Robot Top View" width="400" class="center"/>
+
 ### The Setup
 
-<img src="setup.jpg" alt="Full Setup" width="200"/>
-<img src="setupTopView.jpg" alt="Top View of Setup" width="200"/>
+<img src="setup.jpeg" alt="Full Setup" width="400" class="center"/>
+<img src="setupTopView.jpeg" alt="Top View of Setup" width="400" class="center"/>
 
 ### Electronics
 
-<img src="cameraMount.jpg" alt="Camera Mount" width="200"/>
+<img src="cameraMount.jpeg" alt="Camera Mount" width="400" class="center"/>
 
 
 ### Robot Dimensions
