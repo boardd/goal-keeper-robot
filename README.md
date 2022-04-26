@@ -38,7 +38,7 @@ Additionally, we used a camera rigged to provide a top view of the course as sho
 
 We built the majority of the setup using cardboard. We first started by covering a large piece of cardboard with white paper to help our vision system more easily identify the ball. In hindsight, we would have used a color camera rather than a monochrome one as this made detecting the orange colored ping pong ball more difficult. We placed the camera roughly 5 feet above the ground so it is able to see most of the setup. We placed 4 ArUco markers in the corners of a rectangle to help our computer vision algorithm determine the location of the ball. Below are two pictures showing the full setup and what the view from the camera is roughly like (note that this was taken using a cell phone camera).
 
-<img src="setup.jpeg" alt="Full Setup" width="400" class="center"/> <img src="setupTopView.jpeg" alt="Top View of Setup" width="400" class="center"/>
+<img src="setup.jpeg" alt="Full Setup" height="400" class="center"/> <img src="setupTopView.jpeg" alt="Top View of Setup" height="400" class="center"/>
 
 ### Robot Dimensions
 
