@@ -45,11 +45,9 @@ We built the majority of the setup using cardboard. We first started by covering
 
 All dimensions are in millimeters.
 
-<img src="dimensions.png" alt="Robot Dimesions" width="1000" class="center"/>
+<img src="dimensions.png" alt="Robot Dimesions" width="500" class="center"/>
 
-<img src="blockerTop.png" alt="Blocker Top Dimensions" width="300" class="center"/>
-
-<img src="blockerSide.png" alt="Blocker Side Dimensions" width="300" class="center"/>
+<img src="blockerTop.png" alt="Blocker Top Dimensions" height="300" class="center"/> <img src="blockerSide.png" alt="Blocker Side Dimensions" height="200" class="center"/>
 
 
 ### Robot CAD
