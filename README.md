@@ -26,20 +26,40 @@ Most of the mounting hardware was recycled from the <a href="https://www.elegoo.
 
 ### Electronics
 
-The electronics of the robot are also mostly recycled from the Elegoo Tumbller. We used an Arduino Nano microcontroller to recieve and command joint positions to the two motors that came with the Elegoo kit. The motors have encoders which have 1560 ticks per revolution, enough resolution to allow us to have relatively high precision on the position of the motor. Additionally, we used a camera rigged to provide a top view of the course as shown below. The camera uses a global shutter to minimize distortion and runs at roughly 37 fps. You can get the same camera <a href="https://www.amazon.com/Global-Shutter-Monochrome-Cameras-Windows/dp/B089QFRTVX/ref=sr_1_3?crid=137QCXP3HAXIZ&keywords=global+shutter+usb+camera&qid=1650942030&sprefix=global+shutter%2Caps%2C218&sr=8-3">here</a>, though we do recommend a different camera with a higher framerate if you able to get one. We also used the battery from the Elegoo kit to power our whole setup.  
+The electronics of the robot are also mostly recycled from the Elegoo Tumbller. We used an Arduino Nano microcontroller to recieve and command joint positions to the two motors that came with the Elegoo kit. The motors have encoders which have 1560 ticks per revolution, enough resolution to allow us to have relatively high precision on the position of the motor. We also used the battery from the Elegoo kit to power our whole setup. A close up of our electronics is below.
+
+<img src="electronics.jpeg" alt="Electronics" width="600" class="center"/>
+
+Additionally, we used a camera rigged to provide a top view of the course as shown below. The camera uses a global shutter to minimize distortion and runs at roughly 37 fps. You can get the same camera <a href="https://www.amazon.com/Global-Shutter-Monochrome-Cameras-Windows/dp/B089QFRTVX/ref=sr_1_3?crid=137QCXP3HAXIZ&keywords=global+shutter+usb+camera&qid=1650942030&sprefix=global+shutter%2Caps%2C218&sr=8-3">here</a>, though we do recommend a different camera with a higher framerate if you able to get one. We light the scene using a button lamp. This gives us much more controllable lighting conditions for thresholding in our computer vision.
 
 <img src="cameraMount.jpeg" alt="Camera Mount" width="600" class="center"/>
 
 ### The Setup
 
-We built the majority of the setup using cardboard. We first started by covering a large piece of cardboard with white paper to help our vision system more easily identify the ball. In hindsight, we would have used a color camera rather than a monochrome one as this made detecting the orange colored ping pong ball more difficult. We placed the camera roughly 4 feet above the ground so it is able to see most of the setup. We placed 4 ArUco markers in the corners of a rectangle
+We built the majority of the setup using cardboard. We first started by covering a large piece of cardboard with white paper to help our vision system more easily identify the ball. In hindsight, we would have used a color camera rather than a monochrome one as this made detecting the orange colored ping pong ball more difficult. We placed the camera roughly 5 feet above the ground so it is able to see most of the setup. We placed 4 ArUco markers in the corners of a rectangle to help our computer vision algorithm determine the location of the ball. Below are two pictures showing the full setup and what the view from the camera is roughly like (note that this was taken using a cell phone camera).
 
 <img src="setup.jpeg" alt="Full Setup" width="600" class="center"/>
 <img src="setupTopView.jpeg" alt="Top View of Setup" width="600" class="center"/>
 
-
 ### Robot Dimensions
 
-### Robot CAD Images
+All dimensions are in millimeters.
+
+<img src="dimensions.png" alt="Robot Dimesions" width="1000" class="center"/>
+
+<img src="blockerTop.png" alt="Blocker Top Dimensions" width="300" class="center"/>
+
+<img src="blockerSide.png" alt="Blocker Side Dimensions" width="300" class="center"/>
+
+
+### Robot CAD
+
+All robot CAD is availiable on our github for 3D-printing (STL files only)
+
+<img src="robotRender.jpeg" alt="robot render" width="1000" class="center"/>
 
 ### Parts Used
+
+<img src="elegooParts.jpeg" alt="elegooParts" width="400" class="center"/>
+
+<img src="camera.jpg" alt="camera" width="400" class="center"/>
