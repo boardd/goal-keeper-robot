@@ -8,9 +8,39 @@
 
 ### Tracking the Ball
 
+To compute the angle at which we should position the arm to block the ball, we need to know the location of the ball within the playing field.
+
+#### Finding the ball
+
+We determine the location of the ball using a top down camera over the playing field. The raw images look like the following:
+
+<img src="raw-cam-image.png" alt="Raw image from the camera" width="600" class="center">
+
+We painted the ball black to give it high contrast against the white playing field, which makes it easier to identify with computer vision. We use OpenCV to apply an adaptive gaussian threshold to the image, which yields the following:
+
+<img src="thresholded.png" alt="Thresholded image" width="600" class="center">
+
+We can then use OpenCV's contour detection to find contiguous regions of black pixels. We filter these contours by area, keeping only the ones within a pre-defined range, in order to reduce the number of false positives.
+
+#### Computing the ball's position
+
+Once we have identified one or more contours in the image, we can compute the position of each of these contours relative to the ArUco markers on the field, which are at known positions. We do so by using OpenCV's built-in ArUco marker detector. We can then compute a transformation from image space to board space and apply it to all of the identified contours.
+
+Once we know the location of the contours on the board, we can further filter them to exclude any which are not inside the rectangle defined by the markers. This reliably produces only a single location, corresponding to the ball.
+
+In the following images, we draw a red rectangle with its center on where we believe the ball to be:
+
+<img src="ball-1.png" alt="Raw image from the camera" width="400" class="center">
+
+<img src="ball-3.png" alt="Raw image from the camera" width="400" class="center">
+
+<img src="ball-6.png" alt="Raw image from the camera" width="400" class="center">
+
 ### PID Control
 
 ### LQR Control
+
+### Problems
 
 ### Performance Demonstration
 
