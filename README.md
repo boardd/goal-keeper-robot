@@ -2,7 +2,6 @@
 
 ## The Robot
 
-
 ## The Software
 
 ### Tracking the Ball
@@ -16,6 +15,8 @@
 ## The Hardware
 
 ### The Setup
+
+![setupTopView](setupTopView.heic)
 
 ### Electronics
 
