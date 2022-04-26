@@ -36,13 +36,33 @@ In the following images, we draw a red rectangle with its center on where we bel
 
 <img src="ball-6.png" alt="Raw image from the camera" width="400" class="center">
 
-### PID Control
-
 ### LQR Control
 
-### Problems
+We control the arm with an LQR controller, using the following linear model of the dynamics. Constant c0 represents a friction term, and constant c1 represents the impact of the control sent to the motor on its velocity.
+
+<img src="https://chart.googleapis.com/chart?cht=tx&chs=100&chf=bg,s,f2f2f2&chl=A%3D%5Cbegin%7Bpmatrix%7D%0A1%20%26%20%5Ctext%7Bts%7D%5C%5C%0A0%20%26%201%20-%20c_0%0A%5Cend%7Bpmatrix%7D" alt="A Matrix" height="60">
+
+<img src="https://chart.googleapis.com/chart?cht=tx&chs=100&chf=bg,s,f2f2f2&chl=B%3D%5Cbegin%7Bpmatrix%7D%0A0%20%26%20c_1%0A%5Cend%7Bpmatrix%7D" alt="B Matrix" height="40">
+
+We collected data by sending a sequence of commands to the robot and measuring the resulting angles over time. We then tuned constants c0 and c1 to match this data, which yielded c0=.05, c1=.004.
+
+One issue we faced is that when we rapidly sent updates to the desired angle to the LQR controller, we observed unpredictable behavior. The following is a video in which we send updates with a 0.2s delay in-between. The robot behaves as expected:
+
+[LQR with 0.2s delay](https://www.youtube.com/shorts/YelFhvKkZ9k)
+
+However, if we send updates more rapidly, the controller behaves unexpectedly. The following is a video in which we send the updates with a 0.1s delay:
+
+[LQR with 0.1s delay](https://youtube.com/shorts/VBRqGhC0dmI)
+
+We have yet to solve this problem. TODO ADD OUR SOLUTION LATER
+
+### Communication
+
+Since the arm of the goal keeping robot is controlled by an arduino, it cannot read the images from the camera directly. Instead, our computer vision algorithm runs on a laptop connected to the USB camera as well as the arduino, over serial. The laptop reads images from the camera, computes the location of the ball on the board, computes the angle at which the arm should be set, and finally sends that desired angle over the serial port to the arduino. Upon receiving an update, the arduino LQR controller issues commands to the motors to achieve the desired angle.
 
 ### Performance Demonstration
+
+TODO, once we have fixed some bugs
 
 ## The Hardware
 
