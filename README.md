@@ -16,12 +16,12 @@
 
 ### The Setup
 
-![setup](setup.jpg)
-![setupTopView](setupTopView.jpg)
+<img src="setup.jpg" alt="Full Setup" width="200"/>
+<img src="setupTopView.jpg" alt="Top View of Setup" width="200"/>
 
 ### Electronics
 
-![camera](cameraSetup.jpg)
+<img src="cameraMount.jpg" alt="Camera Mount" width="200"/>
 
 
 ### Robot Dimensions
