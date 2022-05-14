@@ -1,4 +1,7 @@
 # Autonomous Goal Keeper
+## The Project
+
+The aim of this project was to create a robot that can autonomously detect a "soccer ball" and defend a goal. We aimed to use computer vision for ball tracking and popular control methods such as PID, LQR, and Feed Forward to accurately position the robot. After considering the relevant constraints such as time and cost, we decided to build a scale model of the setup so we can demonstrate the core capabilities of our robot without building a full scale version.
 
 ## The Robot
 
@@ -47,9 +50,7 @@ All robot CAD is availiable on our github for 3D-printing (STL files only)
 
 ### Parts Used
 
-<img src="elegooParts.jpeg" alt="elegooParts" width="400" class="center"/>
-
-<img src="camera.jpg" alt="camera" width="400" class="center"/>
+<img src="elegooParts.jpeg" alt="elegooParts" height="300" class="center"/> <img src="camera.jpg" alt="camera" height="300" class="center"/>
 
 ## The Software
 
