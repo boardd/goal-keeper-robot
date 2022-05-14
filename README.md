@@ -25,7 +25,7 @@ The electronics of the robot are also mostly recycled from the Elegoo Tumbller. 
 
 <img src="electronics.jpeg" alt="Electronics" width="300" class="center"/>
 
-Additionally, we used a camera rigged to provide a top view of the course as shown below. The camera uses a global shutter to minimize distortion and runs at roughly 37 fps. You can get the same camera <a href="https://www.amazon.com/Global-Shutter-Monochrome-Cameras-Windows/dp/B089QFRTVX/ref=sr_1_3?crid=137QCXP3HAXIZ&keywords=global+shutter+usb+camera&qid=1650942030&sprefix=global+shutter%2Caps%2C218&sr=8-3">here</a>, though we do recommend a different camera with a higher framerate if you able to get one. We light the scene using a button lamp. This gives us much more controllable lighting conditions for thresholding in our computer vision.
+Additionally, we used a camera rigged to provide a top view of the course as shown below. The camera uses a global shutter to minimize distortion and runs at roughly 37 fps. You can get the same camera <a href="https://www.amazon.com/Global-Shutter-Monochrome-Cameras-Windows/dp/B089QFRTVX/ref=sr_1_3?crid=137QCXP3HAXIZ&keywords=global+shutter+usb+camera&qid=1650942030&sprefix=global+shutter%2Caps%2C218&sr=8-3">here</a>, though we do recommend a different camera with a higher framerate if you able to get one. We light the scene using a lamp. This gives us much more controllable lighting conditions for thresholding in our computer vision.
 
 <img src="cameraMount.jpeg" alt="Camera Mount" width="300" class="center"/>
 
@@ -46,9 +46,9 @@ All dimensions are in millimeters.
 
 ### Robot CAD
 
-All robot CAD is availiable on our github for 3D-printing (STL files only)
+All robot CAD is available on our github for 3D-printing (STL files only)
 
-<img src="robotRender.jpeg" alt="robot render" width="500" class="center"/>
+<img src="robotRender.jpeg" alt="robot render" width="300" class="center"/>
 
 ### Parts Used
 
@@ -58,25 +58,23 @@ All robot CAD is availiable on our github for 3D-printing (STL files only)
 
 ### Tracking the Ball
 
-To compute the angle at which we should position the arm to block the ball, we need to know the location of the ball within the playing field.
-
-#### Finding the ball
-
-We determine the location of the ball using a top down camera over the playing field. The raw images look like the following:
+To compute the angle at which we should position the arm to block the ball, we need to know the location of the ball within the playing field. We determine the location of the ball using a top down camera over the playing field. The raw images look like the following:
 
 <img src="raw-cam-image.png" alt="Raw image from the camera" width="600" class="center">
 
-We painted the ball black to give it high contrast against the white playing field, which makes it easier to identify with computer vision. We use OpenCV to apply an adaptive gaussian threshold to the image, which yields the following:
+We painted the ball black to give it high contrast against the white playing field, which makes it easier to identify with computer vision. If you are not using a monochromatic camera like we did, you should be able to leave the ball its original color (orange) and you will find it much easier to threshold based on RGB or HSV values.
+
+We use OpenCV to apply an adaptive gaussian threshold to the image, which yields the following:
 
 <img src="thresholded.png" alt="Thresholded image" width="600" class="center">
 
-We can then use OpenCV's contour detection to find contiguous regions of black pixels. We filter these contours by area, keeping only the ones within a pre-defined range, in order to reduce the number of false positives.
+We can then use OpenCV's contour detection to find contiguous regions of black pixels. We filter these contours by area, keeping only the ones within a pre-defined range. This helps us ignore contours that are overly large or small and reduces the number of false positives.
 
 #### Computing the ball's position
 
-Once we have identified one or more contours in the image, we can compute the position of each of these contours relative to the ArUco markers on the field, which are at known positions. We do so by using OpenCV's built-in ArUco marker detector. We can then compute a transformation from image space to board space and apply it to all of the identified contours.
+Once we have identified one or more contours in the image, we can compute the position of each of these contours relative to the ArUco markers on the field, which are at known positions. We do so by using OpenCV's built-in ArUco marker detector. We can then compute a transformation from image space to world space and apply it to all of the identified contours.
 
-Once we know the location of the contours on the board, we can further filter them to exclude any which are not inside the rectangle defined by the markers. This reliably produces only a single location, corresponding to the ball.
+Once we know the location of the contours in the real world, we can further filter them to exclude any which are not inside the rectangle defined by the markers. This reliably produces only a single location, corresponding to the ball.
 
 In the following images, we draw a red rectangle with its center on where we believe the ball to be:
 
@@ -108,9 +106,11 @@ We have yet to solve this problem. TODO ADD OUR SOLUTION LATER
 
 ### Communication
 
-Since the arm of the goal keeping robot is controlled by an arduino, it cannot read the images from the camera directly. Instead, our computer vision algorithm runs on a laptop connected to the USB camera as well as the arduino, over serial. The laptop reads images from the camera, computes the location of the ball on the board, computes the angle at which the arm should be set, and finally sends that desired angle over the serial port to the arduino. Upon receiving an update, the arduino LQR controller issues commands to the motors to achieve the desired angle.
+Since the arm of the goal keeping robot is controlled by an arduino, it cannot read the images from the camera directly. Instead, our computer vision algorithm runs on a laptop connected to the USB camera as well as the arduino, over serial. The laptop reads images from the camera, computes the location of the ball on the board, computes the angle at which the arm should be set, and finally sends that desired angle over the serial port to the arduino. We used pyserial to establish the serial communications between the arduino and the computer. Upon receiving an update, the arduino LQR controller issues commands to the motors to achieve the desired angle.
 
 ## Performance Demonstrations
+
+Below are some youtube videos showing how our robot performs under different circumstances.
 
 [Ball on Stick](https://youtube.com/shorts/yKTe_psrHVw)
 
