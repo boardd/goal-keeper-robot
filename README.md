@@ -1,7 +1,7 @@
 # Autonomous Goal Keeper
 ## The Project
 
-The aim of this project was to create a robot that can autonomously detect a "soccer ball" and defend a goal. We aimed to use computer vision for ball tracking and popular control methods such as PID, LQR, and Feed Forward to accurately position the robot. After considering the relevant constraints such as time and cost, we decided to build a scale model of the setup so we can demonstrate the core capabilities of our robot without building a full scale version.
+The aim of this project was to create a robot that can autonomously detect a "soccer ball" and defend a goal. We aimed to use computer vision for ball tracking and popular control methods such as PID and LQR to accurately position the robot. After considering the relevant constraints such as time and cost, we decided to build a scale model of the setup so we can demonstrate the core capabilities of our robot without building a full scale version.
 
 ## The Robot
 
@@ -15,8 +15,6 @@ The robot was constructed using 3D-Printed parts as this was the most efficient 
 
 Most of the mounting hardware was recycled from the <a href="https://www.elegoo.com/collections/robot-kits/products/elegoo-tumbller-self-balancing-robot-car">Elegoo Tumbller</a>, which was the robot we used in labs in the past. This included 8 standoffs, 2 motor mounts, one plastic plate, and a few M3 screws. Although we designed the goal to be printed in 2 parts and glued together, we also used the motor mounts to strengthen the bridging by screwing it between the two halves. By mounting all of the hardware on top of the robot, we make the robot portable and easy to relocate to anywhere it might need to be. The two motors are set up in a counter-rotating configuration so that we are able to maximize the amount of availiable torque whilst still maintaining the maximum speed that we are able to reach. We chose to direct drive the motors as it was the most robust and simple design to implement given the time constraints.
 
-In an effort to solve the delay issue detailed below, we removed one of the counter-rotating motors because we suspected that the dynamics of two motors working along the same axle may be highly variable and unpredictable. This was one of the problems suggested by Professor Atkeson after consulting with him. Although removing one motor did not seem to solve our issue, in our final setup we still opted to only use one motor as this gave us one less variable to worry about and still provided enough acceleration on the arm to achieve the response we wanted.
-
 <img src="robotTopView.jpeg" alt="Robot Top View" width="300" class="center"/>
 
 ### Electronics
@@ -25,7 +23,7 @@ The electronics of the robot are also mostly recycled from the Elegoo Tumbller. 
 
 <img src="electronics.jpeg" alt="Electronics" width="300" class="center"/>
 
-Additionally, we used a camera rigged to provide a top view of the course as shown below. The camera uses a global shutter to minimize distortion and runs at roughly 37 fps. You can get the same camera <a href="https://www.amazon.com/Global-Shutter-Monochrome-Cameras-Windows/dp/B089QFRTVX/ref=sr_1_3?crid=137QCXP3HAXIZ&keywords=global+shutter+usb+camera&qid=1650942030&sprefix=global+shutter%2Caps%2C218&sr=8-3">here</a>, though we do recommend a different camera with a higher framerate if you able to get one. We light the scene using a lamp. This gives us much more controllable lighting conditions for thresholding in our computer vision.
+Additionally, we used a camera rigged to provide a top view of the course as shown below. The camera uses a global shutter to minimize distortion and runs at roughly 37 fps. You can get the same camera <a href="https://www.amazon.com/Global-Shutter-Monochrome-Cameras-Windows/dp/B089QFRTVX/ref=sr_1_3?crid=137QCXP3HAXIZ&keywords=global+shutter+usb+camera&qid=1650942030&sprefix=global+shutter%2Caps%2C218&sr=8-3">here</a>, though we do recommend a different camera with a higher framerate if you able to get one. We light the scene using several lamps. This gives us much more controllable lighting conditions for thresholding in our computer vision.
 
 <img src="cameraMount.jpeg" alt="Camera Mount" width="300" class="center"/>
 
