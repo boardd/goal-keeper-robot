@@ -1,7 +1,7 @@
 # Autonomous Goal Keeper
 ## The Project
 
-The aim of this project was to create a robot that can autonomously detect a "soccer ball" and defend a goal. We aimed to use computer vision for ball tracking and popular control methods such as PID and LQR to accurately position the robot. After considering the relevant constraints such as time and cost, we decided to build a scale model of the setup so we can demonstrate the core capabilities of our robot without building a full scale version.
+The aim of this project was to create a robot that can autonomously detect a "soccer ball" and defend a goal. We aimed to use computer vision for ball tracking and popular control methods such as PID and LQR to accurately position the robot's arm. After considering the relevant constraints such as time and cost, we decided to build a scale model of the setup so we can demonstrate the core capabilities of our robot without building a full scale version.
 
 ## The Robot
 
@@ -56,7 +56,11 @@ All robot CAD is available on our github for 3D-printing (STL files only)
 
 ### Tracking the Ball
 
-To compute the angle at which we should position the arm to block the ball, we need to know the location of the ball within the playing field. We determine the location of the ball using a top down camera over the playing field. The raw images look like the following:
+To compute the angle at which we should position the arm to block the ball, we need to know where the ball is going to end up in the horizontal direction, once it reaches the goal.
+
+#### Finding the ball
+
+We determine the location of the ball using a top down camera over the playing field. The raw images look like the following:
 
 <img src="raw-cam-image.png" alt="Raw image from the camera" width="600" class="center">
 
@@ -66,7 +70,7 @@ We use OpenCV to apply an adaptive gaussian threshold to the image, which yields
 
 <img src="thresholded.png" alt="Thresholded image" width="600" class="center">
 
-We can then use OpenCV's contour detection to find contiguous regions of black pixels. We filter these contours by area, keeping only the ones within a pre-defined range. This helps us ignore contours that are overly large or small and reduces the number of false positives.
+We can then use OpenCV's contour detection to find contiguous regions of black pixels. We filter these contours by area, keeping only the ones within a pre-defined range. This helps us ignore contours that are too large or too small and reduces the number of false positives.
 
 #### Computing the ball's position
 
@@ -81,6 +85,12 @@ In the following images, we draw a red rectangle with its center on where we bel
 <img src="ball-3.png" alt="Raw image from the camera" width="400" class="center">
 
 <img src="ball-6.png" alt="Raw image from the camera" width="400" class="center">
+
+#### Estimating the ball's trajectory
+
+Once we have the position of the ball over several frames, we can estimate its trajectory in order to predict where it will end up when it reaches the goal. If we only have a single frame of the ball so far, we simply use its x-coordinate in world space. Otherwise, we take up to the last 5 positions of the ball, and for each subsequent pair of positions, compute the velocity of the ball in world space. We take the average of these velocities, then solve for the ball's x-coordinate at the time that it would reach the y-coordinate of the goal. The following video visualizes this computation:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/EhwE5aTzZk0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### LQR Control
 
@@ -115,3 +125,7 @@ Below are some youtube videos showing how our robot performs under different cir
 [Rolling Ball Success](https://youtube.com/shorts/OoNNkdcSWSA)
 
 [Rolling Ball Failure](https://youtube.com/shorts/upyzuLVMyPU)
+
+# Future Work
+
+TODO
