@@ -1,4 +1,5 @@
 # Autonomous Goal Keeper
+
 ## The Project
 
 The aim of this project was to create a robot that can autonomously detect a "soccer ball" and defend a goal. We aimed to use computer vision for ball tracking and popular control methods such as PID and LQR to accurately position the robot's arm. After considering the relevant constraints such as time and cost, we decided to build a scale model of the setup so we can demonstrate the core capabilities of our robot without building a full scale version.
@@ -100,17 +101,9 @@ We control the arm with an LQR controller, using the following linear model of t
 
 <img src="https://chart.googleapis.com/chart?cht=tx&chs=100&chf=bg,s,f2f2f2&chl=B%3D%5Cbegin%7Bpmatrix%7D%0A0%20%26%20c_1%0A%5Cend%7Bpmatrix%7D" alt="B Matrix" height="40">
 
-We collected data by sending a sequence of commands to the robot and measuring the resulting angles over time. We then tuned constants c0 and c1 to match this data, which yielded c0=.05, c1=.004.
+We collected data by sending a sequence of commands to the robot and measuring the resulting angles over time. We then tuned constants c0 and c1 to match this data, which yielded c0=.03, c1=.00285. The following is a plot comparing the actual encoder data after a sequence of commands with a simulation using the above model and parameters.
 
-One issue we faced is that when we rapidly sent updates to the desired angle to the LQR controller, we observed unpredictable behavior. The following is a video in which we send updates with a 0.2s delay in-between. The robot behaves as expected:
-
-[LQR with 0.2s delay](https://www.youtube.com/shorts/YelFhvKkZ9k)
-
-However, if we send updates more rapidly, the controller behaves unexpectedly. The following is a video in which we send the updates with a 0.1s delay:
-
-[LQR with 0.1s delay](https://youtube.com/shorts/VBRqGhC0dmI)
-
-We have yet to solve this problem. TODO ADD OUR SOLUTION LATER
+<img src="model-tuning.png" alt="Graph of model tuning vs real data" width="600" class="center"/>
 
 ### Communication
 
@@ -120,12 +113,52 @@ Since the arm of the goal keeping robot is controlled by an arduino, it cannot r
 
 Below are some youtube videos showing how our robot performs under different circumstances.
 
-[Ball on Stick](https://youtube.com/shorts/yKTe_psrHVw)
+### Ball on Stick
 
-[Rolling Ball Success](https://youtube.com/shorts/OoNNkdcSWSA)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/wQ2Xh3evgs4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-[Rolling Ball Failure](https://youtube.com/shorts/upyzuLVMyPU)
+### Without trajectory estimation
 
-# Future Work
+<iframe width="560" height="315" src="https://www.youtube.com/embed/va0qUtZI4oE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-TODO
+### With trajectory estimation
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xyy4dbmpT3A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## Problems Faced
+
+### Communication
+
+#### The Problem
+
+One issue we faced is that when we rapidly sent updates to the desired angle to the LQR controller, we observed unpredictable behavior. The following is a video in which we sent updates with a 0.2s delay in-between. The robot behaved as expected:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/YelFhvKkZ9k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+However, if we sent updates more rapidly, the controller behaved unexpectedly. The following is a video in which we sent the updates with a 0.1s delay:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/VBRqGhC0dmI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+#### The Solution
+
+Initially, we thought this may be a quirk of the LQR controller which we were using. However, it turned out that as we sent several updates over serial in rapid succession, the messages would be read simultaneously on the Arduino side. This yielded a garbled desired angle, which caused the unpredictable behavior. We solved the issue by separating each update to the arduino with a line break '\n'. On the Arduino side, we could then use the Serial.readStringUntil('\n') method to isolate each update appropriately.
+
+### Lag
+
+#### The Problem
+
+As with any digital system, there is significant latency from the balls motion in the real world to the camera producing an image, to the computer vision system producing a position, and to the arduino finally positioning the arm. This sequence of delays meant that the arm could not quite keep up with the ball, which caused the arm to miss if the ball was travelling diagonally.
+
+#### The Solution
+
+As discussed above, the solution to this problem was to rely not on our computation of where the ball is currently, but to also predict where the ball will be in the future. Although the system is not able to react any faster, it can make a smarter decision on where to position the arm. Adding trajectory estimation increased the success rate of the arm from around 60% to more than 95%.
+
+## Future Work
+
+### 3D
+
+Currently, the goal keeper only operates in two dimensions. It has no knowledge of the ball's height relative to the ground. With an additional camera looking at the board sideways, we could incorporate this information to better inform the arm's position.
+
+### Scale
+
+Bigger is better. We chose to make a relatively small robot for the sake of simplicity given the limited time we had to develop the system. A larger robot (even full-scale) would of course introduce challenges with safety, overcoming inertia, and overcoming additional inaccuracies given a smaller margin of error.
